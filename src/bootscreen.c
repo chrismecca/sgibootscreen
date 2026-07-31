@@ -81,6 +81,11 @@ extern const u8 realityenginelogo_red[];
 extern const u8 realityenginelogo_green[];
 extern const u8 realityenginelogo_blue[];
 
+/*
+ * ultraviolent.c
+ */
+extern const u8 ultraviolentlogo[];
+
 
 /* Boot screen type
  *   Really only needs to be "old" vs. "new", but
@@ -473,7 +478,6 @@ static inline void draw_point(u16 x, u16 y)
 {
     draw.image[((u32)y * (u32)draw.width) + (u32)x] = draw.colors[draw.color_index];
 }
-
 
 /*
  * draw_sboxfi
@@ -1217,6 +1221,35 @@ static s32 draw_write_bmp_file(const char *filename)
     fflush(fp);
     fclose(fp);
     return 0;
+}
+
+void draw_ultraviolent_logo(const char *filename)
+{
+    const u16 width = 1024;
+    const u16 height = 256;
+
+    if (draw_init(width, height) != 0) {
+        return;
+    }
+
+    draw_mapcolor(
+        BOOTLOGO_IDX,
+        BOOTLOGO_R,
+        BOOTLOGO_G,
+        BOOTLOGO_B
+    );
+
+    draw_setcolor(BOOTLOGO_IDX);
+
+    draw_spans(
+        ultraviolentlogo,
+        0,
+        0,
+        width,
+        height
+    );
+
+    draw_write_bmp_file(filename);
 }
 
 
