@@ -23,5 +23,7 @@ typedef enum {
 } bootscreen_e;
 
 extern void draw_bootscreen(bootscreen_e bootscreen, const char *filename);
+extern void draw_indigo_logo(const char *filename);
+extern void draw_ultraviolent_logo(const char *filename);
 
 #endif /* __BOOTSCREEN_H__ */
